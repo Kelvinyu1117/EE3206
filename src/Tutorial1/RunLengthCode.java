@@ -119,48 +119,42 @@ public class RunLengthCode {
 
         // Your codes
         int i = 0;
-
         while (i < codedMsg.length()) {
             if (codedMsg.charAt(i) == 'O') {
                 if (i + 1 < codedMsg.length() && codedMsg.charAt(i + 1) == 'O') {
 
                     int j = i + 2;
-                    StringBuilder strNum = new StringBuilder();
 
                     while (j < codedMsg.length() && Character.isDigit(codedMsg.charAt(j))) {
-                        strNum.append(codedMsg.charAt(j++));
+                        j++;
                     }
 
-                    i = j;
+                    int num = Integer.parseInt(codedMsg.substring(i + 2, j));
 
-                    int num = Integer.parseInt(strNum.toString());
+                    i = j;
 
                     for (int k = 0; k < num; k++) {
                         buffer.append('0');
                     }
-
                 } else {
                     buffer.append('0');
                     i++;
                 }
-
             } else {
                 if (i + 1 < codedMsg.length() && codedMsg.charAt(i + 1) == 'I') {
                     int j = i + 2;
-                    StringBuilder strNum = new StringBuilder();
 
                     while (j < codedMsg.length() && Character.isDigit(codedMsg.charAt(j))) {
-                        strNum.append(codedMsg.charAt(j++));
+                        j++;
                     }
 
-                    i = j;
+                    int num = Integer.parseInt(codedMsg.substring(i + 2, j));
 
-                    int num = Integer.parseInt(strNum.toString());
+                    i = j;
 
                     for (int k = 0; k < num; k++) {
                         buffer.append('1');
                     }
-
                 } else {
                     buffer.append('1');
                     i++;
