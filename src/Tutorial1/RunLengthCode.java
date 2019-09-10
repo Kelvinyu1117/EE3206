@@ -11,26 +11,20 @@
 /*
     Your task is to implement the compress() and expand() methods in 
     the class RunLengthCode using the revised RLE. 
-
     In this exercise, you may make use of the class StringBuilder.
     StringBuilder object is mutable. It is more convenient and efficient to use
     a StringBuilder object to store the intermediate result of a computation.
-
-    You can use the append() method to append a char, a string, or an integer 
+    You can use the append() method to append a char, a string, or an integer
     to a StringBuilder object.
-
-    You can use the toString() method to produce a String object from a 
+    You can use the toString() method to produce a String object from a
     StringBuffer object.
-
     You may need to use the following methods of the String class
        int length()
-       String substring(int, int) 
+       String substring(int, int)
        char charAt(int)
-
     To check if a char is a digit, you can use the static method
     Character.isDigit(char)
-
-    To convert a string of digits to an integer value, you can use the static 
+    To convert a string of digits to an integer value, you can use the static
     method Integer.parseInt(String)
 */
 
@@ -72,42 +66,30 @@ public class RunLengthCode {
 
         // Your codes
         int i = 0;
+        char out;
+        char prev = 'X';
         while (i < msg.length()) {
-            if (msg.charAt(i) == '0') {
-                if (i + 1 < msg.length() && msg.charAt(i + 1) == '0') {
-                    int cnt = 2;
-                    int j = i + 2;
+            char curr = msg.charAt(i);
 
-                    while (j < msg.length() && msg.charAt(j) == '0') {
-                        j++;
-                        cnt++;
-                    }
-                    i = j;
+            out = (curr == '0') ? 'O' : 'I';
 
-                    buffer.append("OO");
-                    buffer.append(cnt);
-                } else {
-                    buffer.append("O");
-                    i++;
+            buffer.append(out);
+
+            if (curr == prev) {
+                int cnt = 2;
+                int j = i + 1;
+
+                while (j < msg.length() && msg.charAt(j) == curr) {
+                    j++;
+                    cnt++;
                 }
+                i = j;
+
+                buffer.append(cnt);
             } else {
-                if (i + 1 < msg.length() && msg.charAt(i + 1) == '1') {
-                    int cnt = 2;
-                    int j = i + 2;
-
-                    while (j < msg.length() && msg.charAt(j) == '1') {
-                        j++;
-                        cnt++;
-                    }
-                    i = j;
-
-                    buffer.append("II");
-                    buffer.append(cnt);
-                } else {
-                    buffer.append("I");
-                    i++;
-                }
+                i++;
             }
+            prev = curr;
         }
         return buffer.toString();
     }
@@ -119,49 +101,33 @@ public class RunLengthCode {
 
         // Your codes
         int i = 0;
+        char out;
+        char prev = 'X';
         while (i < codedMsg.length()) {
-            if (codedMsg.charAt(i) == 'O') {
-                if (i + 1 < codedMsg.length() && codedMsg.charAt(i + 1) == 'O') {
+            char curr = codedMsg.charAt(i);
 
-                    int j = i + 2;
+            out = (curr == 'O') ? '0' : '1';
 
-                    while (j < codedMsg.length() && Character.isDigit(codedMsg.charAt(j))) {
-                        j++;
-                    }
+            if (curr == prev) {
+                int j = i + 1;
 
-                    int num = Integer.parseInt(codedMsg.substring(i + 2, j));
+                while (j < codedMsg.length() && Character.isDigit(codedMsg.charAt(j))) {
+                    j++;
+                }
 
-                    i = j;
+                int num = Integer.parseInt(codedMsg.substring(i + 1, j));
 
-                    for (int k = 0; k < num; k++) {
-                        buffer.append('0');
-                    }
-                } else {
-                    buffer.append('0');
-                    i++;
+                i = j;
+                for (int k = 0; k < num - 1; k++) {
+                    buffer.append(out);
                 }
             } else {
-                if (i + 1 < codedMsg.length() && codedMsg.charAt(i + 1) == 'I') {
-                    int j = i + 2;
-
-                    while (j < codedMsg.length() && Character.isDigit(codedMsg.charAt(j))) {
-                        j++;
-                    }
-
-                    int num = Integer.parseInt(codedMsg.substring(i + 2, j));
-
-                    i = j;
-
-                    for (int k = 0; k < num; k++) {
-                        buffer.append('1');
-                    }
-                } else {
-                    buffer.append('1');
-                    i++;
-                }
+                buffer.append(out);
+                i++;
             }
+
+            prev = curr;
         }
         return buffer.toString();
     }
 }
-
