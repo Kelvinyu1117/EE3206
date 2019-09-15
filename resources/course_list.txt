@@ -1,0 +1,27 @@
+AP1201	3	GPA	General Physics I
+BCH1100	3	GPA	Chemistry
+BCH1200	3	GPA	Discovery in Biology
+CS1102	3	GPA	Introduction to Computing
+CS2311	3	GPA	Computer Programming
+CS3103	3	GPA	Operating Systems
+CS3402	3	GPA	Database Systems
+EE1001	3	GPA	Foundation of Digital Technology
+EE1002	3	NoGPA	Principles of Electronic Engineering
+EE2000	3	GPA	Logic Circutis Design
+EE2004	3	GPA	Microcomputer Systems
+EE2301	3	GPA	Basic Electronic Circuits
+EE2331	3	GPA	Data Structures and Algorithms
+EE3001	3	GPA	Foundations of Data Engineering
+EE3070	3	GPA	Design Project
+EE3206	3	GPA	Java Programming and Applications
+EE3220	3	GPA	Embedded System Design
+EE3315	3	GPA	Internet Technology
+EE4281	6	GPA	Project
+EE4290	0	NoGPA	Engineering Training I
+EE4291	0	NoGPA	Engineering Training II
+EL0200	6	NoGPA	English for Academic Purposes
+GE1401	3	GPA	University English
+GE2410	3	GPA	English for Engineering
+MA1200	3	GPA	Calculus and Linear Algerba I
+MA1201	3	GPA	Calculus and Linear Algerba II
+MA2001	3	GPA	Multi-variable Calculus and Linear Algerba
