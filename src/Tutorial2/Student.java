@@ -53,9 +53,12 @@ public class Student {
         int i = 0;
         while(i < gradeList.size()) {
             int j = i + 1;
+
             while(j < gradeList.size() && gradeList.get(j).getCourseCode().equals(gradeList.get(i).getCourseCode()))
                 j++;
+
             Grade g = gradeList.get(j - 1);
+
             if(g.getGrade().charAt(0) >= 'A' && g.getGrade().charAt(0) <= 'D' || g.getGrade().charAt(0) == 'P') {
                 Course c = Course.getCourse(g.getCourseCode());
                 if(c != null)
@@ -74,13 +77,17 @@ public class Student {
         double gpa = 0;
 
         // Your codes
+        gradeList.sort(Comparator.comparing(Grade::getCourseCode).thenComparing(Grade::getSem));
         int credits = 0;
         int i = 0;
         while(i < gradeList.size()) {
             int j = i + 1;
+
             while(j < gradeList.size() && gradeList.get(j).getCourseCode().equals(gradeList.get(i).getCourseCode()))
                 j++;
+
             Grade g = gradeList.get(j - 1);
+
             Course c = Course.getCourse(g.getCourseCode());
             if(c != null) {
                 if(!c.isNoGPA() && g.getGrade().charAt(0) >= 'A' && g.getGrade().charAt(0) <= 'F') {
