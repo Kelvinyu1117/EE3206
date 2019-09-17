@@ -63,7 +63,7 @@ public class Course implements Comparable<Course> {
         courseList.sort(Course::compareTo);
 
         int i = Collections.binarySearch(courseList, new Course(courseCode, 0, false, ""));
-        if (i != -1) {
+        if (i >= 0) {
             return courseList.get(i);
         } else {
             return null;  // dummy return statement
