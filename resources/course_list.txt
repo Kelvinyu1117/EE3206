@@ -6,7 +6,7 @@ CS2311	3	GPA	Computer Programming
 CS3103	3	GPA	Operating Systems
 CS3402	3	GPA	Database Systems
 EE1001	3	GPA	Foundation of Digital Technology
-EE1002	3	NoGPA	Principles of Electronic Engineering
+EE1002	3	GPA	Principles of Electronic Engineering
 EE2000	3	GPA	Logic Circutis Design
 EE2004	3	GPA	Microcomputer Systems
 EE2301	3	GPA	Basic Electronic Circuits

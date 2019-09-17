@@ -55,12 +55,9 @@ public class Student {
             boolean hasReTaken = false;
 
             if (gradeList.get(i).getGrade().charAt(0) == 'D' || gradeList.get(i).getGrade().charAt(0) == 'F') {
-                for (int k = i + 1; k < gradeList.size(); k++) {
-                    if (gradeList.get(k).getCourseCode().equals(gradeList.get(i).getCourseCode())) {
+                for (int k = i + 1; k < gradeList.size() && !hasReTaken; k++) {
+                    if (gradeList.get(k).getCourseCode().equals(gradeList.get(i).getCourseCode()))
                         hasReTaken = true;
-                        if(!(gradeList.get(k).getGrade().charAt(0) == 'D' || gradeList.get(k).getGrade().charAt(0) == 'F'))
-                            break;
-                    }
                 }
             }
 
@@ -90,12 +87,9 @@ public class Student {
             boolean hasReTaken = false;
 
             if (gradeList.get(i).getGrade().charAt(0) == 'D' || gradeList.get(i).getGrade().charAt(0) == 'F') {
-                for (int k = i + 1; k < gradeList.size(); k++) {
-                    if (gradeList.get(k).getCourseCode().equals(gradeList.get(i).getCourseCode())) {
+                for (int k = i + 1; k < gradeList.size() && !hasReTaken; k++) {
+                    if (gradeList.get(k).getCourseCode().equals(gradeList.get(i).getCourseCode()))
                         hasReTaken = true;
-                        if(!(gradeList.get(k).getGrade().charAt(0) == 'D' || gradeList.get(k).getGrade().charAt(0) == 'F'))
-                            break;
-                    }
                 }
             }
 
@@ -111,6 +105,9 @@ public class Student {
             }
         }
 
-        return gpa / credits;
+        if(credits == 0)
+            return 0;
+        else
+            return gpa / credits;
     }
 }
