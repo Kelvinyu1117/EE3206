@@ -1,5 +1,5 @@
-package Tutorial4;// Student name:
-// Student ID  : 
+package Tutorial4;// Student name: Wu Kwun Yu
+// Student ID  : 54545500
 
 // Submission deadline: Friday, 11 Oct, 12 noon
 // Implement methods addUser, removeUser, and getUser in class ChatGroup.
@@ -43,7 +43,7 @@ public class ChatGroup {
     }
 
     public User getUser(String tel) {
-        // Implement this method. 
+        // Implement this method.
         // Return the user in the group with the given tel.
         // Return null if no user with the tel is found.
         int index = Collections.binarySearch(members, new User("", tel));
@@ -56,28 +56,19 @@ public class ChatGroup {
     public void addUser(User u) {
         // Implement this method. Add a user to the group.
         // Take note of the representation requirements of the class.
-        int i = 0;
-        while (i >= 0 && i < members.size() && members.get(i).compareTo(u) <= 0) {
-            if (members.get(i).compareTo(u) == 0)
-                i = -1;
-            else
-                i++;
-        }
+        int j = Collections.binarySearch(members, u);
 
-        if (i != -1)
-            members.add(i, u);
+        if (j < 0)
+            members.add((-j) - 1, u);
     }
 
     public void removeUser(User u) {
         // Implement this method. Remove the user from the group.
         // Take note of the representation requirements of the class.
-        boolean isFound = false;
-        for (int i = 0; i < members.size() && !isFound; i++) {
-            if (members.get(i).compareTo(u) == 0) {
-                members.remove(i);
-                isFound = true;
-            }
-        }
+        int j = Collections.binarySearch(members, u);
+
+        if (j >= 0)
+            members.remove(j);
 
     }
 }

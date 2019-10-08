@@ -1,5 +1,5 @@
-package Tutorial4;// Student name:
-// Student ID  : 
+package Tutorial4;// Student name: Wu Kwun Yu
+// Student ID  : 54845500
 
 // Submission deadline: Friday, 11 Oct, 12 noon
 // Implement the method getFriends in class ChatGroupTest
@@ -15,13 +15,14 @@ public class ChatGroupTest {
         // Implement this static method.
         // Users in the same chat group are considered to be friends.
 
-        // Return a list of users (without duplicate) that are friends 
+        // Return a list of users (without duplicate) that are friends
         // of u derived from the list of chat groups.
         // Result list does not contain u himself/herself.
 
         ArrayList<User> result = new ArrayList();
 
         // Your codes
+
         for (int i = 0, groupIndex = 0; i < groups.size(); i++) {
             if (groups.get(i).getUser(u.getTel()) != null) {
                 groupIndex = i;
@@ -29,16 +30,9 @@ public class ChatGroupTest {
 
                 for (User usr : fdsList) {
                     if (usr.compareTo(u) != 0) {
-                        int j = 0;
-                        while (j >= 0 && j < result.size() && result.get(j).compareTo(usr) <= 0) {
-                            if (result.get(j).compareTo(usr) == 0)
-                                j = -1;
-                            else
-                                j++;
-                        }
-
-                        if (j != -1)
-                            result.add(j, usr);
+                        int j = Collections.binarySearch(result, usr);
+                        if (j < 0)
+                            result.add((-j) - 1, usr);
                     }
                 }
             }
