@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Stack;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -32,10 +33,10 @@ public class Calculator extends JFrame {
 
     //Other instance variables required in your design
     private boolean isDecimal;
-    private boolean sign; // false -> positive, true -> negative
+    private boolean sign; // true -> positive (including zero), false -> negative
     private boolean hasInputOpr;
-    private ArrayList<Double> operands;
-    private ArrayList<Character> opr;
+    private Stack<Double> operands;
+    private Stack<Character> opr;
     private double res;
     private int mr;
 
@@ -111,8 +112,8 @@ public class Calculator extends JFrame {
 
         // Your statements, where approrpriate
         sign = true;
-        operands = new ArrayList<>();
-        opr = new ArrayList<>();
+        operands = new Stack<>();
+        opr = new Stack<>();
     }
 
     private double evaluate(char c, double opr1, double opr2)
@@ -202,7 +203,7 @@ public class Calculator extends JFrame {
                         case 13: //button '-'
                         case 14: //button '*'
                         case 15: //button '/'
-                        case 16: //button '='                            
+                        case 16: //button '='
                             // Your handler for buttons '+', '-', '*', '/', and '='
                             operatorBtnHandler(i);
                             break;
@@ -224,7 +225,7 @@ public class Calculator extends JFrame {
                     }  //end of switch
                     break;
                 }
-            }  //end of for-loop                      
+            }  //end of for-loop
 
         }  //end of ActionPerformed
     } //end of ActionListener
@@ -268,35 +269,33 @@ public class Calculator extends JFrame {
         if (operands.size() == 2 && opr.size() > 0) {
             boolean err = false;
             try {
-                res = evaluate(opr.get(0), operands.get(0), operands.get(1));
+                double operand2 = operands.pop();
+                double operand1 = operands.pop();
+                char operator = opr.pop();
+                res = evaluate(operator, operand1, operand2);
             } catch (IllegalArgumentException e) {
                 display.setText("Error");
                 err = true;
             }
 
             if (!err) {
-                sign = res > 0;
+                sign = res >= 0;
                 if (i != 16) {
-                    operands.set(1, res);
-                    operands.remove(0);
-                } else {
-                    operands.clear();
+                    operands.push(res);
                 }
-
-                opr.remove(0);
 
                 showDisplay(res);
             }
         }
 
         if (i == 12) {
-            opr.add('+');
+            opr.push('+');
         } else if (i == 13) {
-            opr.add('-');
+            opr.push('-');
         } else if (i == 14) {
-            opr.add('*');
+            opr.push('*');
         } else if (i == 15) {
-            opr.add('/');
+            opr.push('/');
         }
 
     }
