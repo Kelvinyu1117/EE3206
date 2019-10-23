@@ -70,6 +70,7 @@ public class ChatGroup_Test2 {
         fdList1.addAll(groups.stream()
                 .filter(gp -> gp.getUser(u.getTel()).isPresent())
                 .flatMap(gp -> Arrays.stream(gp.getMembers()))
+                .filter(usr -> !usr.getTel().equals(u.getTel()))
                 .sorted()
                 .collect(s, a, c)
         );
@@ -89,7 +90,7 @@ public class ChatGroup_Test2 {
 
         fdList2.sort(User::compareTo);
 
-        // approach 3 (not working, as equals method/hashCode method are not implemented)
+        // approach 3
         ArrayList<User> fdList3 = new ArrayList<User>();
         fdList3.addAll(groups.stream()
                 .filter(gp -> gp.getUser(u.getTel()).isPresent())
@@ -100,7 +101,7 @@ public class ChatGroup_Test2 {
 
         fdList3.sort(User::compareTo);
 
-        return fdList2;
+        return fdList3;
     }
 
 

@@ -5,6 +5,7 @@ package Tutorial6;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Optional;
 
 public class ChatGroup {
@@ -91,4 +92,19 @@ class User implements Comparable<User> {
         return tel.compareTo(other.tel);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof User))
+            return false;
+
+        User usr2 = (User) o;
+
+        return tel.equals(usr2.getTel());
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, tel);
+    }
 }
