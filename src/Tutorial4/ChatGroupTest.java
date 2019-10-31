@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+
 public class ChatGroupTest {
     public static List<User> getFriends(List<ChatGroup> groups, User u) {
         // Implement this static method.
