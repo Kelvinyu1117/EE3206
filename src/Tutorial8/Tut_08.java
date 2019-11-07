@@ -8,7 +8,9 @@ package Tutorial8;// Student name:
 //     Fibonacci(1) = 1
 //     Fibonacci(n) = Fibonacci(n-2) + Fibonacci(n-1) for n >= 2
 
+import java.lang.reflect.Array;
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -37,12 +39,15 @@ public class Tut_08 {
 
         // Design your program to generate a stream of Fibonacci numbers
         // using Stream.iterate().
-        // Collect the fist 100 Fibonacci numbers in a List<BigInteger>.  
+        // Collect the fist 100 Fibonacci numbers in a List<BigInteger>.
 
 
-        List<BigInteger> list2 = Stream.iterate(new BigInteger("0"), i -> i.add(new BigInteger("1")))
+        BigInteger[] base = {BigInteger.ZERO, BigInteger.ONE};
+        List<BigInteger> list2 = Stream.iterate(base, FibonacciUtil::next)
                 .limit(100)
-                .map(FibonacciUtil::next)
+                .map(g -> {
+                    return g[0];
+                })
                 .collect(Collectors.toList());
 
 
@@ -58,29 +63,30 @@ public class Tut_08 {
 
 
 class FibonacciUtil {
-    private static BigInteger p;
-    private static BigInteger q;
-    private BigInteger i = new BigInteger("0");
+    private BigInteger[] f = {BigInteger.ZERO, BigInteger.ONE};
+    private int i = 0;
 
     // Your codes
     public BigInteger next() {
-        BigInteger res = next(i);
-        i = i.add(new BigInteger("1"));
-        return res;
-    }
-
-    public static BigInteger next(BigInteger after) {
-        if (after.compareTo(new BigInteger("0")) == 0) {
-            p = new BigInteger("0");
-            return p;
-        } else if (after.compareTo(new BigInteger("1")) == 0) {
-            q = new BigInteger("1");
-            return q;
+        if (i == 0) {
+            i++;
+            return BigInteger.ZERO;
+        } else if (i == 1) {
+            i++;
+            return BigInteger.ONE;
         } else {
-            BigInteger res = p.add(q);
-            p = q;
-            q = res;
-            return res;
+            BigInteger[] res = next(f);
+            f = res;
+            return res[1];
         }
     }
+
+    public static BigInteger[] next(BigInteger[] g) {
+        BigInteger[] t = Arrays.copyOf(g, 2);
+        BigInteger res = t[0].add(t[1]);
+        t[0] = t[1];
+        t[1] = res;
+        return t;
+    }
 }
+
